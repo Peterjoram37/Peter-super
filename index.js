@@ -27,18 +27,34 @@ async function startBot() {
     }
   });
 
-  // Example handler for incoming messages
+  // ✅ Hapa tunaanza kugundua commands
+  const commands = new Map();
+  const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+  for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    commands.set(command.name, command);
+  }
+
   sock.ev.on('messages.upsert', async ({ messages }) => {
     const msg = messages[0];
-    if (!msg.message) return;
+    if (!msg.message || msg.key.fromMe) return;
 
-    const sender = msg.key.remoteJid;
-    const text = msg.message?.conversation || msg.message?.extendedTextMessage?.text;
+    const text = msg.message.conversation || msg.message.extendedTextMessage?.text;
+    if (!text || !text.startsWith('.')) return;
 
-    console.log(`📩 Ujumbe kutoka kwa ${sender}: ${text}`);
+    const args = text.trim().split(/ +/);
+    const commandName = args.shift().slice(1).toLowerCase();
 
-    if (text?.toLowerCase() === 'hello' || text?.toLowerCase() === 'hi') {
-      await sock.sendMessage(sender, { text: '👋 Hello! Nipo hewani!' });
+    const command = commands.get(commandName);
+    if (command) {
+      const senderName = msg.pushName || 'User';
+      try {
+        await command.execute(sock, msg, args, senderName);
+      } catch (err) {
+        console.error(err);
+        await sock.sendMessage(msg.key.remoteJid, { text: '❌ Error running command.' }, { quoted: msg });
+      }
     }
   });
 }
