@@ -26,6 +26,28 @@ async function startBot() {
       console.log('✅ BOT IMEUNGANISHWA NA WHATSAPP');
     }
   });
+// Anti-Link Detection
+sock.ev.on('messages.upsert', async ({ messages }) => {
+  const msg = messages[0];
+  if (!msg.message || msg.key.fromMe) return;
+
+  const text = msg.message.conversation || msg.message.extendedTextMessage?.text;
+
+  // Link detection regex pattern (checks for HTTP, HTTPS, and other common links)
+  const linkRegex = /https?:\/\/[^\s]+/;
+
+  if (linkRegex.test(text)) {
+    const sender = msg.key.remoteJid;
+
+    // Here you can choose to either send a warning or kick the user
+    await sock.sendMessage(sender, { text: '⚠️ *Warning:* Sending links is not allowed in this group!' });
+
+    // Uncomment to kick the user (optional)
+    // await sock.groupParticipantsUpdate(msg.key.remoteJid, [sender], 'remove');
+
+    console.log(`🔗 Link detected from ${sender}: ${text}`);
+  }
+});
 
   // ✅ Hapa tunaanza kugundua commands
   const commands = new Map();
