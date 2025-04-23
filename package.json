@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Peter-super WhatsApp bot powered by @whiskeysockets/baileys",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
