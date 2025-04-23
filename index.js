@@ -17,7 +17,7 @@ app.get('/qr', async (req, res) => {
   const qrImg = await qrcode.toDataURL(latestQR);
   res.send(`
     <html>
-      <head><title>QR Code - Peter Power</title></head>
+      <head><title>QR Code - Peter Super</title></head>
       <body style="text-align:center;font-family:sans-serif;">
         <h2>Scan QR Code to connect WhatsApp</h2>
         <img src="${qrImg}" />
@@ -46,12 +46,15 @@ async function startBot() {
 
     if (connection === 'close') {
       const shouldReconnect = (lastDisconnect?.error)?.output?.statusCode !== DisconnectReason.loggedOut;
-      console.log('Connection closed due to', lastDisconnect?.error, ', reconnecting:', shouldReconnect);
+      console.log('❌ Connection closed due to:', lastDisconnect?.error);
       if (shouldReconnect) {
+        console.log('🔄 Reconnecting...');
         startBot();
+      } else {
+        console.log('🚫 Logged out. Please delete auth_info and restart.');
       }
     } else if (connection === 'open') {
-      console.log('✅ PETER POWER MD BOT IMEUNGANISHWA NA WHATSAPP');
+      console.log('✅ PETER SUPER MD BOT IMEUNGANISHWA NA WHATSAPP');
       latestQR = '';
     }
   });
@@ -73,10 +76,12 @@ async function startBot() {
     const text = msg.message.conversation || msg.message.extendedTextMessage?.text;
     const sender = msg.key.remoteJid;
 
+    // 🔗 Anti-Link
     if (text && linkRegex.test(text)) {
       await sock.sendMessage(sender, { text: '⚠️ *Warning:* Sending links is not allowed in this group!' });
     }
 
+    // 🧠 Commands
     if (text?.startsWith('.')) {
       const args = text.trim().split(/ +/);
       const commandName = args.shift().slice(1).toLowerCase();
@@ -93,16 +98,19 @@ async function startBot() {
       }
     }
 
+    // 🖼️ Image to sticker
     if (msg.message.imageMessage) {
       const imageBuffer = await sock.downloadMediaMessage(msg);
       await sock.sendMessage(sender, { sticker: imageBuffer });
     }
 
+    // 🔊 Audio to text (placeholder)
     if (msg.message.audioMessage) {
       const audioBuffer = await sock.downloadMediaMessage(msg);
-      await sock.sendMessage(sender, { text: 'Transcribed audio text' });
+      await sock.sendMessage(sender, { text: 'Transcribed audio text' }); // Replace with real speech-to-text
     }
 
+    // 🤖 ChatGPT Q&A
     if (text && text.toLowerCase() !== 'hello' && text.toLowerCase() !== 'hi') {
       try {
         const response = await axios.post('https://api.openai.com/v1/chat/completions', {
@@ -121,6 +129,7 @@ async function startBot() {
       }
     }
 
+    // 📋 Simple Auto-replies
     if (text?.toLowerCase() === 'hello' || text?.toLowerCase() === 'hi') {
       await sock.sendMessage(sender, { text: '👋 Hello! How can I assist you today?' });
     } else if (text?.toLowerCase() === 'bye') {
