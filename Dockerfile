@@ -1,20 +1,20 @@
-# Base image
-FROM node:18-alpine
+# Use a Node.js image as the base image
+FROM node:18
 
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package files first for layer caching
+# Copy package.json and package-lock.json (if available) to the container
 COPY package*.json ./
 
-# Install dependencies
+# Install the dependencies
 RUN npm install
 
-# Copy all other files
+# Copy the rest of your application code to the container
 COPY . .
 
-# Expose default port (optional - kama unatumia Express)
+# Expose the port (if needed, modify according to your needs)
 EXPOSE 3000
 
-# Start the bot
-CMD ["node", "index.js"]
+# Start the bot with the "start" script defined in package.json
+CMD ["npm", "start"]
