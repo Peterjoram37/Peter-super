@@ -1,4 +1,5 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
+const { state, saveCreds } = await useMultiFileAuthState("./auth_info");
 const ffmpeg = require('fluent-ffmpeg');  // Install ffmpeg package
 const { Boom } = require('@hapi/boom');
 const qrcode = require('qrcode-terminal');
