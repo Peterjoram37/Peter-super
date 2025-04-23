@@ -1,0 +1,8 @@
+{
+  pattern: "anime",
+  alias: ["anime", "animeinfo", "anime-search"],
+  desc: "Tafuta taarifa za anime yoyote",
+  category: "search",
+  use: ".anime [jina la anime]",
+  filename: __filename
+}
