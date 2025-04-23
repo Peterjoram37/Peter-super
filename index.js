@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys')
 const ffmpeg = require('fluent-ffmpeg')
 const { Boom } = require('@hapi/boom')
