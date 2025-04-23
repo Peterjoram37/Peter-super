@@ -47,24 +47,31 @@ async function startBot() {
 
   sock.ev.on('creds.update', saveCreds);
 
-  sock.ev.on('connection.update', (update) => {
-    const { connection, lastDisconnect, qr } = update;
-    if (qr) latestQR = qr;
+ sock.ev.on('connection.update', (update) => {
+  const { connection, lastDisconnect, qr } = update;
+  if (qr) latestQR = qr;
 
-    if (connection === 'close') {
-      const shouldReconnect = (lastDisconnect?.error)?.output?.statusCode !== DisconnectReason.loggedOut;
-      console.log('❌ Connection closed due to:', lastDisconnect?.error);
-      if (shouldReconnect) {
-        console.log('🔄 Reconnecting...');
-        startBot();
-      } else {
-        console.log('🚫 Logged out. Please delete auth_info and restart.');
-      }
-    } else if (connection === 'open') {
-      console.log('✅ PETER SUPER MD BOT IMEUNGANISHWA NA WHATSAPP');
-      latestQR = '';
+  if (connection === 'close') {
+    const shouldReconnect = (lastDisconnect?.error)?.output?.statusCode !== DisconnectReason.loggedOut;
+    console.log('❌ Connection closed due to:', lastDisconnect?.error);
+    if (shouldReconnect) {
+      console.log('🔄 Reconnecting...');
+      startBot();
+    } else {
+      console.log('🚫 Logged out. Please delete auth_info and restart.');
     }
-  });
+  } else if (connection === 'open') {
+    console.log('✅ PETER SUPER MD BOT IMEUNGANISHWA NA WHATSAPP');
+    latestQR = '';
+
+    // ✅ Ujumbe wa notification kwa admin
+    const ownerNumber = '255677780801@s.whatsapp.net';
+    sock.sendMessage(ownerNumber, {
+      text: '🤖 Bot yako imeunganishwa kikamilifu na WhatsApp! 🎉'
+    });
+  }
+});
+
 
   const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 
