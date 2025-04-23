@@ -24,17 +24,26 @@ module.exports = {
 │ • .translate <lugha> <maneno> - Tafsiri maneno
 │ • .broadcast <msg> - Tuma ujumbe kwa kila mtu
 │ • .antilink on/off - Zima au washa kinga ya link
+│ • .weather <mji> - Angalia hali ya hewa ya mji
+│ • .anime <jina la anime> - Pata taarifa kuhusu anime
+│ • .hacking - Simulate hacking sequence kwa furaha
 
 🎨 *MEDIA & STICKERS*
 │ • .sticker (reply to image/video) - Tengeneza sticker
 │ • .toimg (reply to sticker) - Sticker kuwa picha
 │ • .tomp3 (reply to video) - Video kuwa sauti
 │ • .speech (reply to text) - Maneno kuwa sauti
+│ • .backgroundremove - Ondoa background kwenye picha
+│ • .cartoon - Picha iwe cartoon
+│ • .oldphoto - Picha kuwa ya zamani (retro)
 
 🧠 *FUN & GAMES*
 │ • .game - Chagua mchezo wa kucheza
 │ • .mathgame - Hesabu za haraka
 │ • .quiz - Majibu sahihi
+│ • .joke - Cheka na mcheshi
+│ • .quote - Pata methali au quotes za kijamii
+│ • .word - Tafsiri au jibu maneno
 
 🛡️ *GROUP FEATURES*
 │ • Anti-Link - Zuia watu kutuma link
