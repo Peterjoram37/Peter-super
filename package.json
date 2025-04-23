@@ -21,7 +21,8 @@
     "node-fetch": "^3.3.2",
     "openai": "^4.17.0",
     "qrcode-terminal": "^0.12.0",
-    "translate-google-api": "^2.3.2"
+   "@vitalets/google-translate-api": "^7.0.0"
+
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
