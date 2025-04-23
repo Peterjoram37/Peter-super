@@ -1,0 +1,32 @@
+{
+  "name": "peter-super-md",
+  "version": "1.0.0",
+  "description": "Peter-super WhatsApp bot powered by @whiskeysockets/baileys",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": ["whatsapp", "bot", "baileys", "peter-powe"],
+  "author": "Peter Joram Devs",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "axios": "^1.6.0",
+    "chalk": "^5.3.0",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "form-data": "^4.0.0",
+    "moment": "^2.29.4",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.17.0",
+    "qrcode-terminal": "^0.12.0",
+    "translate-google-api": "^2.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
