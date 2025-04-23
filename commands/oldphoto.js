@@ -18,8 +18,7 @@ module.exports = {
       const res = await axios.post("https://api.deepai.org/api/old-photo", form, {
         headers: {
           ...form.getHeaders(),
-          "api-key": "46c2af57-292d-444b-aa22-ca58fa617752
-"
+          "api-key": "46c2af57-292d-444b-aa22-ca58fa617752"
         },
       });
 
