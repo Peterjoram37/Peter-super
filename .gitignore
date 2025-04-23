@@ -1,25 +1,2 @@
-# Node.js modules
 node_modules/
-
-# Log files
-*.log
-
-# Environment variables
-.env
-
-# Session files
-/auth_info/session.json
-
-# OS-specific files
-.DS_Store
-Thumbs.db
-
-# npm package lock
-package-lock.json
-
-# Build output
-dist/
-build/
-
-# Other files you don't want to track
-*.swp
+npm-debug.log
