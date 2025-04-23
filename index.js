@@ -17,7 +17,7 @@ app.get('/qr', async (req, res) => {
   const qrImg = await qrcode.toDataURL(latestQR);
   res.send(`
     <html>
-      <head><title>QR Code - Peter Super</title></head>
+      <head><title>QR Code - Peter Power</title></head>
       <body style="text-align:center;font-family:sans-serif;">
         <h2>Scan QR Code to connect WhatsApp</h2>
         <img src="${qrImg}" />
@@ -51,7 +51,7 @@ async function startBot() {
         startBot();
       }
     } else if (connection === 'open') {
-      console.log('✅ PETER SUPER MD BOT IMEUNGANISHWA NA WHATSAPP');
+      console.log('✅ PETER POWER MD BOT IMEUNGANISHWA NA WHATSAPP');
       latestQR = '';
     }
   });
@@ -64,8 +64,7 @@ async function startBot() {
     commands.set(command.name, command);
   }
 
-  const linkRegex = /https?:\/\/[^
-\s]+/;
+  const linkRegex = /https?:\/\/[\S]+/;
 
   sock.ev.on('messages.upsert', async ({ messages }) => {
     const msg = messages[0];
@@ -74,7 +73,7 @@ async function startBot() {
     const text = msg.message.conversation || msg.message.extendedTextMessage?.text;
     const sender = msg.key.remoteJid;
 
-    if (linkRegex.test(text)) {
+    if (text && linkRegex.test(text)) {
       await sock.sendMessage(sender, { text: '⚠️ *Warning:* Sending links is not allowed in this group!' });
     }
 
@@ -111,7 +110,7 @@ async function startBot() {
           messages: [{ role: 'user', content: text }],
         }, {
           headers: {
-            'Authorization': `Bearer YOUR_OPENAI_API_KEY`
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
           }
         });
         const reply = response.data.choices[0].message.content;
