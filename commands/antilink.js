@@ -1,17 +1,29 @@
 const fs = require('fs');
 const path = './database/antilink.json';
 
-if (!fs.existsSync(path)) fs.writeFileSync(path, JSON.stringify({}));
+// Hakikisha folder ipo, kama haipo, liunde
+if (!fs.existsSync('./database')) {
+  fs.mkdirSync('./database');
+}
+
+// Hakikisha file ipo, kama halipo, liunde
+if (!fs.existsSync(path)) {
+  fs.writeFileSync(path, JSON.stringify({}));
+}
 
 module.exports = {
   name: 'antilink',
   description: 'Washa au zima mfumo wa kuzuia link group.',
   async execute(sock, msg, args) {
     const isGroup = msg.key.remoteJid.endsWith('@g.us');
-    if (!isGroup) return await sock.sendMessage(msg.key.remoteJid, { text: '⚠️ Amri hii ni kwa magroup tu.' }, { quoted: msg });
+    if (!isGroup) {
+      return await sock.sendMessage(msg.key.remoteJid, { text: '⚠️ Amri hii ni kwa magroup tu.' }, { quoted: msg });
+    }
 
     const isAdmin = msg.key.fromMe || (msg.participant?.admin || '').includes('admin');
-    if (!isAdmin) return await sock.sendMessage(msg.key.remoteJid, { text: '🛑 Huna ruhusa ya kutumia amri hii.' }, { quoted: msg });
+    if (!isAdmin) {
+      return await sock.sendMessage(msg.key.remoteJid, { text: '🛑 Huna ruhusa ya kutumia amri hii.' }, { quoted: msg });
+    }
 
     const groupId = msg.key.remoteJid;
     const data = JSON.parse(fs.readFileSync(path));
