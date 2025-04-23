@@ -1,0 +1,8 @@
+module.exports = {
+  pattern: "news",
+  alias: ["news", "habari", "breakingnews"],
+  desc: "Soma habari za dunia kwa kifupi",
+  category: "tools",
+  use: ".news",
+  filename: __filename,
+};
