@@ -1,0 +1,8 @@
+module.exports = {
+  pattern: "backgroundremove",
+  alias: ["backgroundremove", "bgremove", "ondoa_background"],
+  desc: "Ondoa background ya picha kwa AI",
+  category: "tools",
+  use: ".backgroundremove (mjibu picha)",
+  filename: __filename,
+};
