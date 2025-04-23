@@ -2,7 +2,10 @@ services:
   - type: web
     name: peter-super-md
     env: node
+    region: oregon
     plan: free
     buildCommand: "npm install"
     startCommand: "npm start"
     autoDeploy: true
+    branch: main
+    repo: https://github.com/Mrskymax/Peter-super
