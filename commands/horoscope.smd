@@ -1,0 +1,8 @@
+module.exports = {
+  pattern: "horoscope",
+  alias: ["horoscope", "nyota", "zodiac"],
+  desc: "Pata utabiri wa nyota yako",
+  category: "fun",
+  use: ".horoscope [jina la nyota]",
+  filename: __filename,
+};
