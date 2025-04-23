@@ -12,6 +12,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 let latestQR = '';
 
+// Add the update command
+const updateCommand = require('./commands/update');  // Assuming your command is in the `commands` folder
+
+// Add to your commands map or list
+const commands = new Map();
+commands.set(updateCommand.name, updateCommand);  // Adding the update command to the command map
+
 app.get('/qr', async (req, res) => {
   if (!latestQR) return res.send('⏳ QR code haijapatikana bado. Tafadhali subiri...');
   const qrImg = await qrcode.toDataURL(latestQR);
@@ -59,7 +66,6 @@ async function startBot() {
     }
   });
 
-  const commands = new Map();
   const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 
   for (const file of commandFiles) {
