@@ -1,15 +1,10 @@
-import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys'
-import ffmpeg from 'fluent-ffmpeg'
-import { Boom } from '@hapi/boom'
-import qrcode from 'qrcode-terminal'
-import fs from 'fs'
-import path from 'path'
-import axios from 'axios'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys')
+const ffmpeg = require('fluent-ffmpeg')
+const { Boom } = require('@hapi/boom')
+const qrcode = require('qrcode-terminal')
+const fs = require('fs')
+const path = require('path')
+const axios = require('axios')
 
 async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState('./auth_info')
@@ -38,8 +33,8 @@ async function startBot() {
   const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter(file => file.endsWith('.js'))
 
   for (const file of commandFiles) {
-    const command = await import(`./commands/${file}`)
-    commands.set(command.default.name, command.default)
+    const command = require(`./commands/${file}`)
+    commands.set(command.name, command)
   }
 
   const linkRegex = /https?:\/\/[^\s]+/
@@ -100,4 +95,15 @@ async function startBot() {
     }
 
     if (text?.toLowerCase() === 'hello' || text?.toLowerCase() === 'hi') {
-      await sock.sendMessage(sender, { text: '👋 Hello
+      await sock.sendMessage(sender, { text: '👋 Hello! How can I assist you today?' })
+    } else if (text?.toLowerCase() === 'bye') {
+      await sock.sendMessage(sender, { text: '👋 Goodbye! Have a great day!' })
+    } else if (text?.toLowerCase() === 'help') {
+      await sock.sendMessage(sender, {
+        text: 'Peter Power WhatsApp Bot: \n- Type "hello" for a greeting. \n- Type "bye" to say goodbye.'
+      })
+    }
+  })
+}
+
+startBot()
