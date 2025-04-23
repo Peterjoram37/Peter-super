@@ -1,0 +1,8 @@
+module.exports = {
+  pattern: "quote",
+  alias: ["quote", "hekima", "inspire"],
+  desc: "Pata nukuu ya hekima au msukumo",
+  category: "fun",
+  use: ".quote",
+  filename: __filename,
+};
