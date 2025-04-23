@@ -1,0 +1,8 @@
+module.exports = {
+  pattern: "joke",
+  alias: ["joke", "utani", "cheka"],
+  desc: "Cheka na utani mmoja random",
+  category: "fun",
+  use: ".joke",
+  filename: __filename,
+};
