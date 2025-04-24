@@ -1,28 +1,17 @@
 module.exports = {
   name: 'broadcast',
-  description: 'Tuma ujumbe kwa magroup/chats yote',
-  async execute(sock, msg, args, senderName, isOwner) {
-    if (!isOwner) {
-      return await sock.sendMessage(msg.key.remoteJid, { text: '⛔ Hii amri ni ya admin tu!' }, { quoted: msg });
-    }
+  description: 'Tuma ujumbe kwa magroup yote',
+  async execute(sock, msg, args) {
+    if (!msg.key.fromMe) return sock.sendMessage(msg.key.remoteJid, { text: '⚠️ Ni admin tu anaweza kutumia hii command.' });
 
-    const message = args.join(' ');
-    if (!message) {
-      return await sock.sendMessage(msg.key.remoteJid, { text: '⚠️ Tafadhali andika ujumbe. Mfano: .broadcast Hello wote!' }, { quoted: msg });
-    }
+    const text = args.join(' ');
+    if (!text) return sock.sendMessage(msg.key.remoteJid, { text: '📢 Andika ujumbe. Mfano: .broadcast Hello watu!' });
 
     const chats = await sock.groupFetchAllParticipating();
-    const groupIds = Object.keys(chats);
-
-    await sock.sendMessage(msg.key.remoteJid, { text: `📢 Inatuma ujumbe kwa magroup ${groupIds.length}...` }, { quoted: msg });
-
-    for (const groupId of groupIds) {
-      await new Promise(resolve => setTimeout(resolve, 1500)); // delay kidogo ili isiblockwe
-      await sock.sendMessage(groupId, {
-        text: `📢 *TANGAZO KUTOKA KWA ${senderName}:*\n\n${message}`
-      });
+    for (let jid in chats) {
+      await sock.sendMessage(jid, { text });
     }
 
-    await sock.sendMessage(msg.key.remoteJid, { text: '✅ Ujumbe umetumwa kwa magroup yote.' }, { quoted: msg });
+    await sock.sendMessage(msg.key.remoteJid, { text: `✅ Ujumbe umetumwa kwa magroup yote.` });
   }
 };
