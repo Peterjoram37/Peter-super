@@ -1,19 +1,10 @@
 module.exports = {
-  pattern: 'owner',
-  alias: ['owner', 'mmiliki'],
-  desc: 'Pata namba ya mmiliki wa bot',
-  category: 'stats',
-  use: '.owner',
-  async execute(sock, msg, args, senderName) {
-    const ownerNumber = 'wa.me/255677780801'; // Replace with your actual WhatsApp number
-
-    const ownerInfo = `
-╭━━━〔 *INFO YA MMILIKI* 〕━━━⬣
-┃ 🤖 *Mmiliki wa Bot:* Peter Joram
-┃ 📞 *Namba:* ${ownerNumber}
-╰━━━━━━━━━━━━━━━━━━━━⬣
-`;
-
-    await sock.sendMessage(msg.key.remoteJid, { text: ownerInfo }, { quoted: msg });
+  name: 'owner',
+  description: 'Onyesha mawasiliano ya mmiliki wa bot',
+  async execute(sock, msg) {
+    const ownerNumber = '255677780801'; // badilisha kama si yako
+    await sock.sendMessage(msg.key.remoteJid, {
+      text: `👑 *Bot developer:* wa.me/${ownerNumber}\nUnaweza kuwasiliana naye kwa msaada au ushauri.`
+    });
   }
 };
