@@ -1,8 +1,0 @@
-{
-  pattern: "weather",
-  alias: ["weather", "haliyanga", "hali", "meteo"],
-  desc: "Angalia hali ya hewa ya eneo fulani",
-  category: "tools",
-  use: ".weather [jina la mji]",
-  filename: __filename
-}
