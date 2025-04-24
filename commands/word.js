@@ -2,24 +2,25 @@ const axios = require("axios");
 const translate = require("@vitalets/google-translate-api");
 
 module.exports = {
-  cmd: ["word", "neno", "dictionary"],
-  desc: "Angalia maana ya neno",
-  category: "tools",
-  async handler(m, { text, args }) {
-    if (!text) return m.reply("Tafadhali andika neno unalotaka kutafuta. Mfano: .word love");
+  name: 'word',
+  description: 'Tafsiri neno kwa Kiingereza',
+  async execute(sock, msg, args) {
+    const word = args.join(' ');
+    if (!word) {
+      return sock.sendMessage(msg.key.remoteJid, { text: '📖 Tafadhali andika neno. Mfano: .word mti' });
+    }
 
     try {
-      // Tafuta maana ya neno kwa kutumia dictionary API
-      const { data } = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${text}`);
-      const def = data[0].meanings[0].definitions[0].definition;
-      
-      // Tafsiri maana ya neno kwenye Kiswahili (au lugha nyingine)
-      const translation = await translate(def, { to: 'sw' });
-      
-      // Rudisha majibu kwa mtumiaji
-      return m.reply(`📖 *${text.toUpperCase()}*: ${def}\n\nTafsiri: ${translation.text}`);
+      const res = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+      const data = res.data[0];
+
+      const meaning = data.meanings.map(m => `• ${m.partOfSpeech}: ${m.definitions[0].definition}`).join('\n');
+
+      await sock.sendMessage(msg.key.remoteJid, {
+        text: `📚 *Maana ya "${data.word}"*:\n${meaning}`
+      });
     } catch (err) {
-      return m.reply("😕 Samahani, siwezi kupata maana ya neno hilo.");
+      await sock.sendMessage(msg.key.remoteJid, { text: '😕 Neno halijapatikana.' });
     }
-  },
+  }
 };
