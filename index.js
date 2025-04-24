@@ -3,6 +3,7 @@ const express = require('express');
 const qrcode = require('qrcode');
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
 const ffmpeg = require('fluent-ffmpeg');
+const googleTTS = require('google-tts-api');
 const { Boom } = require('@hapi/boom');
 const fs = require('fs');
 const path = require('path');
@@ -64,6 +65,35 @@ async function startBot() {
       console.log('✅ PETER SUPER MD BOT IMEUNGANISHWA NA WHATSAPP');
       latestQR = '';
 
+
+
+// Kazi ya kutafsiri maandishi kuwa sauti
+async function convertTextToSpeech(text) {
+    return googleTTS.getAudioUrl(text, {
+        lang: 'sw', // Kuweka lugha ya Kiswahili
+        slow: false,
+        host: 'https://translate.google.com',
+    });
+}
+
+// Sehemu ya kushughulikia command za bot
+bot.on('message-new', async (message) => {
+    const command = message.body.trim().split(' ')[0].toLowerCase(); // Chukua command ya kwanza
+    const args = message.body.trim().split(' ').slice(1); // Chukua mabaki ya maneno kama argument
+
+    // Amri ya .speech
+    if (command === '.speech') {
+        const text = args.join(" ");
+        if (text) {
+            const audioUrl = await convertTextToSpeech(text);
+            await message.reply({ audio: audioUrl }); // Kutuma sauti
+        } else {
+            await message.reply("Tafadhali andika maandishi ya kutafsiri kuwa sauti.");
+        }
+    }
+});
+
+      
       // ✅ Ujumbe wa notification kwa admin
       const ownerNumber = '255677780801@s.whatsapp.net';
       sock.sendMessage(ownerNumber, {
