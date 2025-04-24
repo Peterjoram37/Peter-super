@@ -1,7 +1,5 @@
 const axios = require("axios");
 
-const axios = require('axios');
-
 module.exports = {
   name: 'news',
   description: 'Habari mpya za dunia',
