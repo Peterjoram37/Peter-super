@@ -1,8 +1,0 @@
-module.exports = {
-  pattern: "word",
-  alias: ["word", "neno", "dictionary"],
-  desc: "Pata maana ya neno lolote",
-  category: "tools",
-  use: ".word [neno]",
-  filename: __filename,
-};
