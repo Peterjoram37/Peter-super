@@ -1,8 +1,0 @@
-module.exports = {
-  pattern: "cartoon",
-  alias: ["cartoon", "katuni"],
-  desc: "Geuza picha iwe katuni",
-  category: "tools",
-  use: ".cartoon (mjibu picha)",
-  filename: __filename,
-};
