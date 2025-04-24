@@ -34,7 +34,7 @@ And typing .menu on your whatsapp group
 
 ✍️. ***Deploy for scaning (QR Code)***
     <br>
-<a href='https://peter-super.onrender.com/qr' target="_blank"><img alt='SESSION ID' src='https://img.shields.io/badge/Session_id_2-100000?style=for-the-badge&logo=scan&logoColor=blue&labelColor=black&color=black'/></a>
+<a href='https://peter-super.onrender.com/qr' target="_blank"><img alt='SESSION ID' src='https://img.shields.io/badge/Session_id_1-100000?style=for-the-badge&logo=scan&logoColor=blue&labelColor=black&color=black'/></a>
     <br>   
 ✍️.  ***FORK Peter-super REPO***
     <br>
