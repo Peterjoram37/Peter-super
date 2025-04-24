@@ -32,7 +32,7 @@ module.exports = {
 │ • *.toimg* - Sticker kuwa picha
 │ • *.tomp3* - Video kuwa sauti
 │ • *.speech* - Maneno kuwa sauti
-│ • *.backgroundremove*
+│ • *.backgroundremove* - Ondoa background kwenye picha
 │ • *.cartoon* - Cartoon style
 │ • *.oldphoto* - Muonekano wa zamani
 
@@ -47,7 +47,7 @@ module.exports = {
 
 👥 *GROUP FEATURES*
 ╭───────────────────╮
-│ • Anti-Link System
+│ • Antilink System
 │ • Anti-Delete Msg
 │ • Auto Welcome Msg
 │ • Captcha Verification
