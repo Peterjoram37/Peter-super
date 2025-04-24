@@ -1,19 +1,14 @@
 module.exports = {
-  pattern: 'status',
-  alias: ['status', 'hali'],
-  desc: 'Angalia hali ya bot',
-  category: 'stats',
-  use: '.status',
-  async execute(sock, msg, args, senderName) {
-    const botStatus = `
-╭━━━〔 *Hali ya Bot* 〕━━━⬣
-┃ 🤖 *Bot Inafanya Kazi* ✅
-┃ 🕒 *Muda wa Uendeshaji:* ${new Date().toLocaleTimeString('sw-TZ')}
-┃ 📅 *Tarehe:* ${new Date().toLocaleDateString('sw-TZ')}
-┃ 🧠 *Kasi:* Haraka
-╰━━━━━━━━━━━━━━━━━━━━⬣
-`;
+  name: 'status',
+  description: 'Angalia hali ya bot',
+  async execute(sock, msg) {
+    const memoryUsage = process.memoryUsage().rss / 1024 / 1024;
+    const uptime = process.uptime();
 
-    await sock.sendMessage(msg.key.remoteJid, { text: botStatus }, { quoted: msg });
+    await sock.sendMessage(msg.key.remoteJid, {
+      text: `📊 *Bot Status*\n\n⏱️ Uptime: ${Math.floor(uptime)}s\n📈 Memory Usage: ${memoryUsage.toFixed(2)} MB`
+    });
   }
 };
+
+
