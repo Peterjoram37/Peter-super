@@ -29,11 +29,10 @@ A powerful multi-functional WhatsApp bot built using [`@whiskeysockets/baileys`]
 
 ## STEPS TO DEPLOY
 
-✍️. ***Get Session ID (Pairing Code)***
-    <br>
-<a href='https://mrsky-md-session-qwtj.onrender.com/pair/' target="_blank"><img alt='SESSION ID' src='https://img.shields.io/badge/Session_id-100000?style=for-the-badge&logo=scan&logoColor=blue&labelColor=black&color=black'/></a>
+Don't deploy on hosting site deploy for scaning qr code!
+And typing
 
-✍️. ***Get Session ID (QR Code)***
+✍️. ***Deploy for scaning (QR Code)***
     <br>
 <a href='https://peter-super.onrender.com/qr' target="_blank"><img alt='SESSION ID' src='https://img.shields.io/badge/Session_id_2-100000?style=for-the-badge&logo=scan&logoColor=blue&labelColor=black&color=black'/></a>
     <br>   
