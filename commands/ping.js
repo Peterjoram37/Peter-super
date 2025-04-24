@@ -1,7 +1,11 @@
 module.exports = {
   name: 'ping',
-  description: 'Check if the bot is online and responsive',
+  description: 'bot status',
   async execute(sock, msg, args, senderName) {
-    await sock.sendMessage(msg.key.remoteJid, { text: '🏓 Pong! Bot is active.' });
+    const start = Date.now();
+    await sock.sendMessage(msg.key.remoteJid, { text: '🏓 Pong!' });
+    const end = Date.now();
+    const latency = end - start;
+    await sock.sendMessage(msg.key.remoteJid, { text: `⏱️ Latency: ${latency}ms` });
   }
-}
+};
