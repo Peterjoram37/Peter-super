@@ -1,24 +1,21 @@
 module.exports = {
-  pattern: 'info',
-  alias: ['info', 'mtumiaji', 'user'],
-  desc: 'Pata maelezo ya mtumiaji',
-  category: 'stats',
-  use: '.info',
-  async execute(sock, msg, args, senderName) {
+  name: 'info',
+  description: 'Pata taarifa kuhusu mtumiaji',
+  async execute(sock, msg) {
     const jid = msg.key.participant || msg.key.remoteJid;
-    const num = jid.split('@')[0];
-    const time = new Date().toLocaleTimeString('sw-TZ');
-    const date = new Date().toLocaleDateString('sw-TZ');
+    const contact = await sock.onWhatsApp(jid);
+    const name = msg.pushName || 'Haijulikani';
+    const number = jid.split('@')[0];
 
-    const userInfo = `
-╭━━━〔 *INFO YA MTUMIAJI* 〕━━━⬣
-┃ 🤖 *Mtumiaji:* ${senderName}
-┃ 📞 *Namba:* wa.me/${num}
-┃ 🕒 *Muda:* ${time}
-┃ 📅 *Tarehe:* ${date}
-╰━━━━━━━━━━━━━━━━━━━━⬣
-`;
+    const info = `
+ℹ️ *Taarifa za Mtumiaji*
+────────────────────
+👤 *Jina:* ${name}
+📞 *Namba:* wa.me/${number}
+📡 *JID:* ${jid}
+📆 *Muda:* ${new Date().toLocaleString('sw-TZ')}
+    `;
 
-    await sock.sendMessage(msg.key.remoteJid, { text: userInfo }, { quoted: msg });
+    await sock.sendMessage(msg.key.remoteJid, { text: info });
   }
 };
