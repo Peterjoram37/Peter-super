@@ -30,7 +30,7 @@ A powerful multi-functional WhatsApp bot built using [`@whiskeysockets/baileys`]
 ## STEPS TO DEPLOY
 
 Don't deploy on hosting site deploy for scaning qr code!
-And typing
+And typing .menu on your whatsapp group
 
 ✍️. ***Deploy for scaning (QR Code)***
     <br>
