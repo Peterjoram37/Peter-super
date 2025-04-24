@@ -1,35 +1,19 @@
 module.exports = {
   name: 'game',
-  description: 'Cheza game ndogo ya bahati au quiz.',
-  async execute(sock, msg, args) {
-    const games = [
-      {
-        question: '🇰🇪 Rais wa sasa wa Kenya ni nani?',
-        answer: 'william ruto'
-      },
-      {
-        question: '⚽ Timu ya taifa ya Brazil inaitwaje?',
-        answer: 'selecao'
-      },
-      {
-        question: '🧠 What is the capital city of France?',
-        answer: 'paris'
-      },
-      {
-        question: '🎲 Namba ya bahati kati ya 1 hadi 5 ni ipi?',
-        answer: `${Math.floor(Math.random() * 5) + 1}`
-      }
-    ];
-
-    const selected = games[Math.floor(Math.random() * games.length)];
+  description: 'Cheza game ya hesabu ndogo',
+  async execute(sock, msg) {
+    const a = Math.floor(Math.random() * 20);
+    const b = Math.floor(Math.random() * 20);
+    const answer = a + b;
 
     await sock.sendMessage(msg.key.remoteJid, {
-      text: `🎮 *GAME TIME!*\n\n${selected.question}\n\nJibu kwa kuandika tu: .jibu <jibu lako>`
-    }, { quoted: msg });
+      text: `🧠 *Game ya Hesabu!*\n\nNini jibu la:\n${a} + ${b} = ?\n\nTuma jibu lako chini ya sekunde 15.`,
+    });
 
-    global.currentGame = {
-      answer: selected.answer.toLowerCase(),
-      askedBy: msg.key.remoteJid
+    global.mathAnswers = global.mathAnswers || {};
+    global.mathAnswers[msg.key.remoteJid] = {
+      answer,
+      expires: Date.now() + 15000,
     };
   }
 };
