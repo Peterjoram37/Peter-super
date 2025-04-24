@@ -1,8 +1,0 @@
-module.exports = {
-  pattern: "remini",
-  alias: ["remini", "ng'arisha", "enhance"],
-  desc: "Ng'arisha picha kwa kutumia AI",
-  category: "tools",
-  use: ".remini (tuma na picha)",
-  filename: __filename,
-};
