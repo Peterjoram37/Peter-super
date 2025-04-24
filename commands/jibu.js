@@ -1,20 +1,19 @@
 module.exports = {
   name: 'jibu',
-  description: 'Jibu swali la game.',
+  description: 'Jibu la haraka kwa neno au swali',
   async execute(sock, msg, args) {
-    if (!global.currentGame || global.currentGame.askedBy !== msg.key.remoteJid) {
-      return await sock.sendMessage(msg.key.remoteJid, { text: '🚫 Hakuna game inayoendelea sasa.' }, { quoted: msg });
+    const question = args.join(' ').toLowerCase();
+    if (!question) {
+      return sock.sendMessage(msg.key.remoteJid, { text: '❓ Tafadhali uliza swali mfano: .jibu je, upo?' });
     }
 
-    const userAnswer = args.join(' ').toLowerCase();
-    const correct = global.currentGame.answer;
+    let answer = '🤔 Samahani, sijui jibu la hilo.';
 
-    if (userAnswer === correct) {
-      await sock.sendMessage(msg.key.remoteJid, { text: '🎉 Sahihi! Hongera kwa jibu sahihi!' }, { quoted: msg });
-    } else {
-      await sock.sendMessage(msg.key.remoteJid, { text: `❌ Baya! Jibu sahihi ni: *${correct}*` }, { quoted: msg });
-    }
+    if (question.includes('upo')) answer = 'Nipo! 😊';
+    else if (question.includes('habari')) answer = 'Nzuri sana! Na wewe je?';
+    else if (question.includes('jina lako')) answer = 'Mimi ni Peter Joram 🤖';
+    else if (question.includes('unaweza')) answer = 'Naweza kusaidia kwa mambo mengi! Andika .menu uone.';
 
-    global.currentGame = null; // Reset game
+    await sock.sendMessage(msg.key.remoteJid, { text: answer });
   }
 };
