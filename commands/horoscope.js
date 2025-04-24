@@ -1,28 +1,25 @@
-const axios = require("axios");
+const axios = require('axios');
 
 module.exports = {
-  cmd: ["horoscope", "nyota", "zodiac"],
-  desc: "Utabiri wa nyota leo",
-  category: "fun",
-  async handler(m, { text }) {
-    if (!text) return m.reply("Tafadhali andika jina la nyota yako. Mfano: .horoscope libra");
+  name: 'horoscope',
+  description: 'Angalia nyota yako ya kila siku',
+  async execute(sock, msg, args) {
+    const sign = args[0]?.toLowerCase();
+    if (!sign) {
+      return sock.sendMessage(msg.key.remoteJid, {
+        text: '🔮 Tafadhali andika nyota yako. Mfano: .horoscope capricorn'
+      });
+    }
 
     try {
-      const { data } = await axios.get(`https://aztro.sameerkumar.website/?sign=${text.toLowerCase()}&day=today`, {
-        method: "POST",
+      const { data } = await axios.get(`https://aztro.sameerkumar.website/?sign=${sign}&day=today`, {
+        method: 'POST'
       });
 
-      const msg = `🔮 *Horoscope ya leo kwa ${text.toUpperCase()}*\n\n` +
-        `*Date:* ${data.current_date}\n` +
-        `*Mood:* ${data.mood}\n` +
-        `*Lucky Number:* ${data.lucky_number}\n` +
-        `*Lucky Color:* ${data.color}\n` +
-        `*Compatibility:* ${data.compatibility}\n` +
-        `*Prediction:* ${data.description}`;
-
-      return m.reply(msg);
-    } catch (err) {
-      return m.reply("😕 Samahani, tafadhali hakikisha jina la nyota limeandikwa vizuri.");
+      const response = `🔮 *Horoscope ya leo kwa ${sign.toUpperCase()}*\n\n${data.description}\n\n⭐ Bahati:\n- Upendo: ${data.love}\n- Afya: ${data.health}\n- Kazi: ${data.career}`;
+      await sock.sendMessage(msg.key.remoteJid, { text: response });
+    } catch (e) {
+      await sock.sendMessage(msg.key.remoteJid, { text: '⚠️ Samahani, nyota haijapatikana au kuna tatizo.' });
     }
-  },
+  }
 };
