@@ -18,7 +18,7 @@ module.exports = {
       const email = `${name}@${domain}`;
 
       tempMailUsers[sender] = { name, domain };
-      return m.reply(`📧 Email yako mpya ya muda ni:\n*${email}*\n\nTumia `.tempmail inbox` kuangalia ujumbe.`);
+      return m.reply(`📧 Email yako mpya ya muda ni:\n*${email}*\n\nTumia \`.tempmail inbox\` kuangalia ujumbe.`);
     }
 
     if (subcmd === "inbox") {
