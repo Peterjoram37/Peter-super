@@ -45,4 +45,7 @@ module.exports = {
       }
     }
 
-    return m.reply(`📥 *Menyu ya .tempmail:*\n\n• .tempmail new - Tengeneza email ya muda\n• .
+    // Menyu ya msaada
+    return m.reply(`📥 *Menyu ya .tempmail:*\n\n• .tempmail new - Tengeneza email ya muda\n• .tempmail inbox - Angalia inbox ya email yako`);
+  }
+};
