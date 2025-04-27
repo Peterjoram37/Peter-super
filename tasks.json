@@ -1,0 +1,13 @@
+{
+    "tasks": [
+      {
+        "type": "shell",
+        "label": "install-dependencies",
+        "command": "npm",
+        "args": [
+          "install"
+        ],
+        "problemMatcher": []
+      }
+    ]
+  }
