@@ -1,5 +1,7 @@
 const axios = require('axios');
-const config = require('../config'); // Hakikisha una API key kwenye config.js
+
+// Hifadhi API key kama constant
+const OPENAI_API_KEY = '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';
 
 module.exports = {
   name: 'gpt',
@@ -8,15 +10,14 @@ module.exports = {
     const question = args.join(' ');
     if (!question) return sock.sendMessage(msg.key.remoteJid, { text: 'Tafadhali andika swali. Mfano: .gpt Je, AI ni nini?' }, { quoted: msg });
 
-    // Tumia ChatGPT API (hapa unahitaji kutumia OpenAI API yako)
+    // Tumia ChatGPT API
     try {
-      const axios = require('axios');
       const response = await axios.post('https://api.openai.com/v1/chat/completions', {
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: question }]
       }, {
         headers: {
-          'Authorization': `Bearer YOUR_OPENAI_API_KEY`,
+          'Authorization': `Bearer ${OPENAI_API_KEY}`,
           'Content-Type': 'application/json'
         }
       });
