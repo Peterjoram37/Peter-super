@@ -1,4 +1,4 @@
-const yts = require("yt-search");
+const yts = require("ytdl-core");
 
 module.exports = {
   cmd: ["find", "tafuta"],
