@@ -1,1 +1,10 @@
-{}
+{
+    "groups": {
+        "1234567890-123456@g.us": true,
+        "0987654321-098765@g.us": false
+    },
+    "users": {
+        "255677780801@s.whatsapp.net": true,
+        "255712345678@s.whatsapp.net": false
+    }
+}
